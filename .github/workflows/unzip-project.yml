@@ -1,0 +1,28 @@
+
+name: Extract DiscordTools ZIP
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'DiscordTools-Android-Project.zip'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository files
+        uses: actions/checkout@v4
+
+      - name: Extract ZIP
+        run: |
+          mkdir -p extracted
+          unzip -o DiscordTools-Android-Project.zip -d extracted
+
+      - name: Upload extracted project
+        uses: actions/upload-artifact@v4
+        with:
+          name: DiscordTools-Extracted
+          path: extracted/
+          
