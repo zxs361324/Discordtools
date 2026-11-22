@@ -34,10 +34,12 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          accept-android-sdk-licenses: true
+          accept-android-sdk-licenses: false
 
       - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses > /dev/null || true
+        run: |
+          mkdir -p "$ANDROID_HOME/licenses"
+          yes | sdkmanager --licenses > /dev/null || true
 
       - name: Install Android SDK packages
         run: |
